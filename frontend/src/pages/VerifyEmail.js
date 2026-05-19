@@ -17,6 +17,7 @@ const VerifyEmail = () => {
 
       setLoading(true);
       try {
+        // eslint-disable-next-line no-unused-vars
         const response = await axios.get(`/api/auth/verify-email/${token}`);
         setMessage('Email verified successfully! Redirecting to login...');
         setTimeout(() => navigate('/login'), 2000);

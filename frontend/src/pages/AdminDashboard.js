@@ -3,7 +3,6 @@ import { useAuth } from '../context/AuthContext';
 
 const AdminDashboard = () => {
   const { user } = useAuth();
-  const [users, setUsers] = useState([]);
 
   return (
     <div className="admin-dashboard-container">

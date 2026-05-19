@@ -14,6 +14,7 @@ const ForgotPassword = () => {
     setError('');
 
     try {
+      // eslint-disable-next-line no-unused-vars
       const response = await axios.post('/api/auth/forgot-password', { email });
       setMessage('Password reset email sent. Check your inbox.');
       setEmail('');

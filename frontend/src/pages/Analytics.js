@@ -5,38 +5,38 @@ import { LineChartComponent } from '../components/Charts';
 const Analytics = () => {
   const [analytics, setAnalytics] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-
-  // Mock data for demonstration
-  const mockAnalytics = {
-    stats: {
-      totalEvents: 1250,
-      eventsByType: {
-        api_call: 650,
-        storage_used: 300,
-        login: 200,
-        export: 100
-      },
-      dailyEvents: {
-        '2026-05-13': 150,
-        '2026-05-14': 180,
-        '2026-05-15': 220,
-        '2026-05-16': 250,
-        '2026-05-17': 280,
-        '2026-05-18': 170
-      }
-    },
-    events: [
-      { _id: '1', eventType: 'api_call', metadata: { endpoint: '/api/users' }, timestamp: new Date() },
-      { _id: '2', eventType: 'storage_used', metadata: { bytes: 1024000 }, timestamp: new Date() },
-      { _id: '3', eventType: 'login', metadata: { ip: '192.168.1.1' }, timestamp: new Date() }
-    ]
-  };
 
   useEffect(() => {
+    // Mock data for demonstration
+    const mockAnalytics = {
+      stats: {
+        totalEvents: 1250,
+        eventsByType: {
+          api_call: 650,
+          storage_used: 300,
+          login: 200,
+          export: 100
+        },
+        dailyEvents: {
+          '2026-05-13': 150,
+          '2026-05-14': 180,
+          '2026-05-15': 220,
+          '2026-05-16': 250,
+          '2026-05-17': 280,
+          '2026-05-18': 170
+        }
+      },
+      events: [
+        { _id: '1', eventType: 'api_call', metadata: { endpoint: '/api/users' }, timestamp: new Date() },
+        { _id: '2', eventType: 'storage_used', metadata: { bytes: 1024000 }, timestamp: new Date() },
+        { _id: '3', eventType: 'login', metadata: { ip: '192.168.1.1' }, timestamp: new Date() }
+      ]
+    };
+
     const fetchAnalytics = async () => {
       try {
         const token = localStorage.getItem('token');
+        // eslint-disable-next-line no-unused-vars
         const response = await axios.get('/api/analytics', {
           headers: { Authorization: `Bearer ${token}` },
         });
@@ -54,7 +54,6 @@ const Analytics = () => {
   }, []);
 
   if (loading) return <div className="text-center mt-8">Loading analytics...</div>;
-  if (error) return <div className="text-red-600 text-center mt-8">{error}</div>;
 
   const dailyData = Object.entries(analytics?.stats?.dailyEvents || {}).map(([date, count]) => ({
     date,

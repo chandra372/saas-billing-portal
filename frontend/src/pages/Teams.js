@@ -40,10 +40,7 @@ const Teams = () => {
   ];
 
   useEffect(() => {
-    fetchTeams();
-  }, []);
-
-  const fetchTeams = async () => {
+    const fetchTeams = async () => {
     try {
       const token = localStorage.getItem('token');
       const response = await axios.get('/api/teams', {
@@ -57,7 +54,9 @@ const Teams = () => {
     } finally {
       setLoading(false);
     }
-  };
+
+    fetchTeams();
+  }, []);
 
   const handleCreateTeam = async (e) => {
     e.preventDefault();

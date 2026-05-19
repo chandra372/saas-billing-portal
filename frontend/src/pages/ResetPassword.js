@@ -23,6 +23,7 @@ const ResetPassword = () => {
 
     setLoading(true);
     try {
+      // eslint-disable-next-line no-unused-vars
       const response = await axios.post('/api/auth/reset-password', {
         token,
         password,

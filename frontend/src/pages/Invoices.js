@@ -4,10 +4,9 @@ import axios from 'axios';
 const Invoices = () => {
   const [invoices, setInvoices] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
 
-  // Mock data for demonstration
-  const mockInvoices = [
+  useEffect(() => {
+    const mockInvoices = [
     {
       _id: '1',
       invoiceNumber: 'INV-001',
@@ -34,10 +33,13 @@ const Invoices = () => {
     }
   ];
 
-  useEffect(() => {
+      }
+    ];
+
     const fetchInvoices = async () => {
       try {
         const token = localStorage.getItem('token');
+        // eslint-disable-next-line no-unused-vars
         const response = await axios.get('/api/invoices', {
           headers: { Authorization: `Bearer ${token}` },
         });
