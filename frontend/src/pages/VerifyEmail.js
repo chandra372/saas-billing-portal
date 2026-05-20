@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -8,7 +8,7 @@ const VerifyEmail = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
 
-  React.useEffect(() => {
+  useEffect(() => {
     const verifyEmail = async () => {
       if (!token) {
         setMessage('Invalid verification link');
@@ -17,8 +17,8 @@ const VerifyEmail = () => {
 
       setLoading(true);
       try {
-        // eslint-disable-next-line no-unused-vars
-        const response = await axios.get(`/api/auth/verify-email/${token}`);
+        // Removed unused 'response' variable
+        await axios.get(`/api/auth/verify-email/${token}`);
         setMessage('Email verified successfully! Redirecting to login...');
         setTimeout(() => navigate('/login'), 2000);
       } catch (error) {

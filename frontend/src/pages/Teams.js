@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+// Moved outside component – constant mock data
+const mockTeams = [
+  { _id: '1', name: 'Engineering Team', description: 'Core development team', members: [{ user: 'user1', role: 'owner' }, { user: 'user2', role: 'admin' }, { user: 'user3', role: 'member' }] },
+  { _id: '2', name: 'Marketing Team', description: 'Marketing and growth initiatives', members: [{ user: 'user4', role: 'owner' }, { user: 'user5', role: 'member' }] },
+  { _id: '3', name: 'Product Team', description: 'Product management and design', members: [{ user: 'user6', role: 'owner' }] }
+];
+
 const Teams = () => {
   const [teams, setTeams] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [newTeam, setNewTeam] = useState({ name: '', description: '' });
 
-  const mockTeams = [
-    { _id: '1', name: 'Engineering Team', description: 'Core development team', members: [{ user: 'user1', role: 'owner' }, { user: 'user2', role: 'admin' }, { user: 'user3', role: 'member' }] },
-    { _id: '2', name: 'Marketing Team', description: 'Marketing and growth initiatives', members: [{ user: 'user4', role: 'owner' }, { user: 'user5', role: 'member' }] },
-    { _id: '3', name: 'Product Team', description: 'Product management and design', members: [{ user: 'user6', role: 'owner' }] }
-  ];
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const fetchTeams = async () => {
       try {
@@ -27,8 +27,7 @@ const Teams = () => {
       }
     };
     fetchTeams();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, []); // mockTeams is now a stable external constant, no dependency needed
 
   const handleCreateTeam = async (e) => {
     e.preventDefault();

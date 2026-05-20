@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+// Moved outside component – it never changes, so no dependency issues
+const mockInvoices = [
+  { _id: '1', invoiceNumber: 'INV-001', amount: 29.99, issueDate: '2026-05-01', status: 'paid', pdfUrl: '#' },
+  { _id: '2', invoiceNumber: 'INV-002', amount: 99.99, issueDate: '2026-05-10', status: 'sent', pdfUrl: '#' },
+  { _id: '3', invoiceNumber: 'INV-003', amount: 299.99, issueDate: '2026-05-15', status: 'paid', pdfUrl: '#' }
+];
+
 const Invoices = () => {
   const [invoices, setInvoices] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const mockInvoices = [
-    { _id: '1', invoiceNumber: 'INV-001', amount: 29.99, issueDate: '2026-05-01', status: 'paid', pdfUrl: '#' },
-    { _id: '2', invoiceNumber: 'INV-002', amount: 99.99, issueDate: '2026-05-10', status: 'sent', pdfUrl: '#' },
-    { _id: '3', invoiceNumber: 'INV-003', amount: 299.99, issueDate: '2026-05-15', status: 'paid', pdfUrl: '#' }
-  ];
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const fetchInvoices = async () => {
       try {
@@ -25,7 +25,6 @@ const Invoices = () => {
       }
     };
     fetchInvoices();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (loading) return <div className="text-center mt-8">Loading invoices...</div>;
